@@ -43,7 +43,7 @@ for j in range(1, len(tr_elements)):
         i += 1
 dict={title:column for (title,column) in col}
 df=pd.DataFrame(dict)
-df.drop(df.columns[[0, 2, 4, 5, 6, 7, 8]], axis = 1, inplace = True)
+df.drop(df.columns[[0, 4, 6, 7, 8]], axis = 1, inplace = True)
 
 # selecting rows based on condition
 snake_df = df[df['Item'].str.contains('Snake')]
@@ -54,10 +54,10 @@ df = df.reset_index(drop=True)
 
 print(df)
 
-if not os.path.isfile('C:/Users/1/Desktop/lp.xlsm'):
-    df.to_excel('C:/Users/1/Desktop/lp.xlsm', index=False)
+if not os.path.isfile('C:/Users/1/Desktop/lp 2.0.xlsm'):
+    df.to_excel('C:/Users/1/Desktop/lp 2.0.xlsm', index=False)
 
-workbook = xl.load_workbook(filename='C:/Users/1/Desktop/lp.xlsm', keep_vba=True, keep_links=True)
+workbook = xl.load_workbook(filename='C:/Users/1/Desktop/lp 2.0.xlsm', keep_vba=True, keep_links=True)
 
 sheet = workbook.active
 
@@ -72,13 +72,15 @@ max_row = len(df.index) + 1
 for (index, pd_row) in df.iterrows():
     item = pd_row['Item']
     isk_lp = pd_row['isk/lp']
-    for xl_row in sheet.iter_rows(min_row=2, max_row=max_row, min_col = 3, max_col=5):
+    cost = pd_row['Isk'] + pd_row['Other Cost']
+    for xl_row in sheet.iter_rows(min_row=2, max_row=max_row, min_col = 3, max_col=8):
         if xl_row[0].value == item:
             delta = isk_lp - xl_row[1].value
             xl_row[1].value = isk_lp
             xl_row[2].value = delta
+            xl_row[5].value = cost;
             break
 
 
-workbook.save(filename=('C:/Users/1/Desktop/lp.xlsm'))
-os.startfile('C:/Users/1/Desktop/lp.xlsm')
+workbook.save(filename=('C:/Users/1/Desktop/lp 2.0.xlsm'))
+os.startfile('C:/Users/1/Desktop/lp 2.0.xlsm')
