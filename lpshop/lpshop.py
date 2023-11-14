@@ -54,10 +54,10 @@ df = df.reset_index(drop=True)
 
 print(df)
 
-if not os.path.isfile('C:/Users/1/Desktop/lp 2.0.xlsm'):
-    df.to_excel('C:/Users/1/Desktop/lp 2.0.xlsm', index=False)
+if not os.path.isfile('C:/Users/user/Desktop/lp 2.0.xlsm'):
+    df.to_excel('C:/Users/user/Desktop/lp 2.0.xlsm', index=False)
 
-workbook = xl.load_workbook(filename='C:/Users/1/Desktop/lp 2.0.xlsm', keep_vba=True, keep_links=True)
+workbook = xl.load_workbook(filename='C:/Users/user/Desktop/lp 2.0.xlsm', keep_vba=True, keep_links=True)
 
 sheet = workbook.active
 
@@ -78,9 +78,8 @@ for (index, pd_row) in df.iterrows():
             delta = isk_lp - xl_row[1].value
             xl_row[1].value = isk_lp
             xl_row[2].value = delta
-            xl_row[5].value = cost;
+            xl_row[5].value = cost
             break
 
-
-workbook.save(filename=('C:/Users/1/Desktop/lp 2.0.xlsm'))
-os.startfile('C:/Users/1/Desktop/lp 2.0.xlsm')
+workbook.save(filename=('C:/Users/user/Desktop/lp 2.0.xlsm'))
+os.startfile('C:/Users/user/Desktop/lp 2.0.xlsm')
